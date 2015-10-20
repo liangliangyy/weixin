@@ -15,7 +15,7 @@
 
 import werobot
 
-robot = werobot.WeRoBot(token='tokenhere')
+robot = werobot.WeRoBot(token='lylinux')
 
 @robot.handler
 def echo(message):
