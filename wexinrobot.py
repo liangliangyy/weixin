@@ -14,6 +14,8 @@
 """
 
 import werobot
+import gevent.monkey;
+gevent.monkey.patch_all()
 
 robot = werobot.WeRoBot(token='lylinux')
 
