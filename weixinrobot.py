@@ -28,7 +28,7 @@ from werobot.reply import ArticlesReply, Article
 def search(message):
 
     s=message.content
-    return str(s).replace('?','')
+
     blogapi=blog()
     articles=blogapi.Search(str(s).replace('?',''))
     return articles
