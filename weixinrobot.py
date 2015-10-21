@@ -26,7 +26,9 @@ from werobot.reply import ArticlesReply, Article
 
 @robot.filter(re.compile(r"^\?.*"))
 def search(message):
+
     s=message.content
+    return str(s).replace('?','')
     blogapi=blog()
     articles=blogapi.Search(str(s).replace('?',''))
     return articles
