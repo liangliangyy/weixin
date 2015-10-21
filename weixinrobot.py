@@ -56,7 +56,7 @@ def s(message):
 @robot.text
 def deal(message):
 
-    if message.content.find(u'\uff1f'.encode('gb2312'))==0:
+    if message.content.find(u'\uff1f')==0:
         return s(message)
 
 
