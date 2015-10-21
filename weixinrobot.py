@@ -12,6 +12,10 @@
 @file: wexinrobot.py
 @time: 2015/10/20 22:06
 """
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 import werobot
 import gevent.monkey;
@@ -44,7 +48,9 @@ def search(message):
 def s(message):
     s=message.content
     blogapi=blog()
-    articles=blogapi.Search(str(s).replace('？',''))
+    ask='？'
+    ask=ask.encode('gb18030')
+    articles=blogapi.Search(str(s.replace(ask,'')))
     if len(articles) ==0:
         return str(s).replace('？','')+' 没有搜索到文章哦'
     reply = ArticlesReply(message=message)
@@ -55,8 +61,9 @@ def s(message):
 
 @robot.text
 def deal(message):
-
-    if message.content.find(u'？'.encode('gb2312'))==0:
+    ask='？'
+    ask=ask.encode('gb18030')
+    if message.content.find(ask)==0:
         return s(message)
 
 
