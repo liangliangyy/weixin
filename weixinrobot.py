@@ -55,7 +55,7 @@ def s(message):
 
 @robot.text
 def deal(message):
-    if re.compile("^\？.*").match(message.content):
+    if message.content.find('？')==0:
         return s(message)
 
 
