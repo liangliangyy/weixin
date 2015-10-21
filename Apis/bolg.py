@@ -50,8 +50,7 @@ class blog():
             title=post['title']
             description=post['excerpt']
             attachments=post['attachments']
-            print(url)
-            print(description)
+
             img=''
             if len(attachments)>0:
                 img=attachments[0]['url']
