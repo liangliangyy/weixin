@@ -24,7 +24,7 @@ import re
 from Apis.bolg import *
 from werobot.reply import ArticlesReply, Article
 
-@robot.filter(re.compile(r"^\?.*"))
+@robot.filter(re.compile(r"^\?.*"),re.compile(r"^\？.*"))
 def search(message):
 
     s=message.content
@@ -38,7 +38,6 @@ def search(message):
         reply.add_article(article)
 
     return reply
-
 #中文问号
 @robot.filter(re.compile(r"^\？.*"))
 def s(message):
@@ -59,7 +58,7 @@ def sub(message):
 
 
 
-@robot.filter(re.compile('help',re.X))
+@robot.filter(re.compile('help',re.I))
 def help(message):
     return """?关键字搜索文章
     如?python
