@@ -1,0 +1,67 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+
+"""
+@version: ??
+@author: liangliang
+@license: Apache Licence 
+@contact: liangliangyy@gmail.com
+@site: http://www.lylinux.org
+@software: PyCharm
+@file: bolg.py
+@time: 2015/10/21 21:46
+"""
+import sys, urllib, urllib2, json
+from urllib2 import HTTPError
+
+class blog():
+    def __init__(self):
+        pass
+
+    def UserAgent(self, url):
+        i_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) \
+    AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36", \
+                     "Referer": 'http://baidu.com/'}
+
+        req = urllib2.Request(url,headers=i_headers)
+        req.add_header("apikey",self.apikey)
+        html = urllib2.urlopen(req).read()
+        return html
+    #jsons=json.loads(res,encoding='utf-8')
+
+    """"title",
+            "description",
+            "img",
+            "url"
+    """
+    def Search(self,searchstr):
+        url="http://www.lylinux.org/api/get_search_results/?search="+searchstr
+        res=self.UserAgent(url)
+        jsons=json.load(res,encoding='utf-8')
+        articles=[]
+        article=[]
+        posts=jsons['posts']
+        count=0
+        for post in posts:
+            url=post['url']
+            title=post['title']
+            description=post['excerpt']
+            attachments=post['attachments']
+            img=''
+            if len(attachments)>0:
+                img=attachments[0]['url']
+            else:
+                img='http://www.lylinux.org/wp-content/uploads/2015/01/IMG_0137.jpg'
+
+
+            article.append(title)
+            article.append(description)
+            article.append(img)
+            article.append(url)
+            articles.append(article)
+            count+=1
+            if count==10:
+                break
+        return articles
+

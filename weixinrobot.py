@@ -21,12 +21,32 @@ from werobot.reply import ArticlesReply, Article
 
 robot = werobot.WeRoBot(token='lylinux')
 import re
-
+from Apis.bolg import *
 from werobot.reply import ArticlesReply, Article
 
-@robot.filter(re.compile(".*?bb.*?"))
-def b():
-    return  '正文中有b'
+@robot.filter(re.compile(r"^\?.*"))
+def search(message):
+    s=message.content
+    blogapi=blog()
+    articles=blogapi.Search(str(s).replace('?',''))
+    return articles
+
+
+@robot.subscribe
+def sub(message):
+    return '欢迎关注!'
+
+
+
+@robot.filter('^help$')
+def help(message):
+    return """
+    ?关键字搜索文章
+    如?python
+    """
+#@robot.filter('?')
+
+
 
 @robot.handler
 def echo(message):
