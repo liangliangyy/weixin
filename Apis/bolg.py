@@ -25,7 +25,7 @@ class blog():
                      "Referer": 'http://baidu.com/'}
 
         req = urllib2.Request(url,headers=i_headers)
-       
+
         html = urllib2.urlopen(req).read()
         return html
     #jsons=json.loads(res,encoding='utf-8')
@@ -38,7 +38,7 @@ class blog():
     def Search(self,searchstr):
         url="http://www.lylinux.org/api/get_search_results/?search="+searchstr
         res=self.UserAgent(url)
-        jsons=json.load(res,encoding='utf-8')
+        jsons=json.loads(res,encoding='utf-8')
         articles=[]
         article=[]
         posts=jsons['posts']

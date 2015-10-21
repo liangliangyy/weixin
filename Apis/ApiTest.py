@@ -18,10 +18,14 @@ __author__ = 'liangliangyy@gmail.com'
 from GetWeather import *
 import json
 from tuling import *
+from bolg import *
 
 if __name__=='__main__':
-    tl=TuLing("西安天气")
-    print(tl.getdata())
+
+    b=blog()
+    res= b.Search('python')
+    print(str(res))
+
     '''
     wearher=GetWeather('西安')
     res= wearher.getjson()
