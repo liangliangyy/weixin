@@ -25,7 +25,7 @@ class blog():
                      "Referer": 'http://baidu.com/'}
 
         req = urllib2.Request(url,headers=i_headers)
-        req.add_header("apikey",self.apikey)
+       
         html = urllib2.urlopen(req).read()
         return html
     #jsons=json.loads(res,encoding='utf-8')
