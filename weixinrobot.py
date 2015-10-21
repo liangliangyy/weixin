@@ -55,7 +55,7 @@ def s(message):
 
 @robot.text
 def deal(message):
-    if message.content.find('？')==0:
+    if message.content.find(u'？')==0:
         return s(message)
 
 
