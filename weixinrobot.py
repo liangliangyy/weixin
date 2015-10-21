@@ -38,8 +38,9 @@ def search(message):
         reply.add_article(article)
 
     return reply
+
+
 #中文问号
-@robot.filter(re.compile(r"^\？.*"))
 def s(message):
     s=message.content
     blogapi=blog()
@@ -51,6 +52,12 @@ def s(message):
         reply.add_article(article)
 
     return reply
+
+@robot.text
+def deal(message):
+    if re.compile("^\？.*").match(message.content):
+        return s(message)
+
 
 @robot.subscribe
 def sub(message):
