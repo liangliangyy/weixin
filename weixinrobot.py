@@ -30,7 +30,7 @@ def search(message):
     s=message.content
 
     blogapi=blog()
-    articles=blogapi.Search(str(s).replace('?',''))
+    articles=blogapi.Search(str(s).replace('?','').replace('？',''))
     if len(articles) ==0:
         return str(s).replace('?','')+' 没有搜索到文章哦'
     reply = ArticlesReply(message=message)
@@ -39,6 +39,10 @@ def search(message):
 
     return reply
 
+#中文问号
+@robot.filter(re.compile(r"^\？.*"))
+def s(message):
+    return search(message)
 
 @robot.subscribe
 def sub(message):
@@ -46,13 +50,11 @@ def sub(message):
 
 
 
-@robot.filter('help')
+@robot.filter(re.compile(r'help',re.X))
 def help(message):
-    return """
-    ?关键字搜索文章
+    return """?关键字搜索文章
     如?python
     """
-#@robot.filter('?')
 
 
 
