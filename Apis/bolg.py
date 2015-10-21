@@ -14,6 +14,7 @@
 """
 import sys, urllib, urllib2, json
 from urllib2 import HTTPError
+from werobot.reply import  Article
 
 class blog():
     def __init__(self):
@@ -40,28 +41,27 @@ class blog():
         res=self.UserAgent(url)
         jsons=json.loads(res,encoding='utf-8')
         articles=[]
-        article=[]
         posts=jsons['posts']
         count=0
+        if jsons['count']==0:
+            return []
         for post in posts:
             url=post['url']
             title=post['title']
             description=post['excerpt']
             attachments=post['attachments']
+            print(url)
+            print(description)
             img=''
             if len(attachments)>0:
                 img=attachments[0]['url']
             else:
                 img='http://www.lylinux.org/wp-content/uploads/2015/01/IMG_0137.jpg'
-
-
-            article.append(title)
-            article.append(description)
-            article.append(img)
-            article.append(url)
+            article=Article(title=title,description=description,img=img,url=url)
             articles.append(article)
             count+=1
             if count==10:
                 break
         return articles
+
 
