@@ -62,17 +62,19 @@ def s(message):
 @robot.text
 def deal(message):
     ask='？'
-    print(type(ask))
+
     ask=ask.decode('utf-8')
-    print(type(ask))
-    print(type(message.content))
+
     if message.content.find(ask)==0:
         return s(message)
 
 
 @robot.subscribe
 def sub(message):
-    return '欢迎关注!'
+    return '''欢迎关注!
+    ?关键字搜索文章
+    如?python
+    help获得帮助'''
 
 
 
@@ -80,6 +82,7 @@ def sub(message):
 def help(message):
     return """?关键字搜索文章
     如?python
+    help获得帮助
     """
 
 
