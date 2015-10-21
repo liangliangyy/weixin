@@ -22,9 +22,9 @@ from bolg import *
 
 if __name__=='__main__':
 
-    b=blog()
-    res= b.Search('python')
-    print(str(res))
+    #b=blog()
+    #res= b.Search('python')
+    #print(str(res))
 
     '''
     wearher=GetWeather('西安')

@@ -49,7 +49,7 @@ def s(message):
     s=message.content
     blogapi=blog()
     ask='？'
-    ask=ask.encode('gb18030')
+    ask=ask.decode('utf-8')
     articles=blogapi.Search(str(s.replace(ask,'')))
     if len(articles) ==0:
         return str(s).replace('？','')+' 没有搜索到文章哦'
@@ -62,7 +62,10 @@ def s(message):
 @robot.text
 def deal(message):
     ask='？'
-    ask=ask.encode('gb18030')
+    print(type(ask))
+    ask=ask.decode('utf-8')
+    print(type(ask))
+    print(type(message.content))
     if message.content.find(ask)==0:
         return s(message)
 
