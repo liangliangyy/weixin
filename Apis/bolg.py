@@ -15,6 +15,8 @@
 import sys, urllib, urllib2, json
 from urllib2 import HTTPError
 from werobot.reply import  Article
+import random
+
 
 class blog():
     def __init__(self):
@@ -55,7 +57,7 @@ class blog():
             if len(attachments)>0:
                 img=attachments[0]['url']
             else:
-                img='http://www.lylinux.org/wp-content/uploads/2015/01/IMG_0137.jpg'
+                img='http://www.lylinux.org/imgs/%s.jpg' % random.randrange(1,8)
             article=Article(title=title,description=description,img=img,url=url)
             articles.append(article)
             count+=1

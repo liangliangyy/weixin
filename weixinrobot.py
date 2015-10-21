@@ -46,7 +46,7 @@ def sub(message):
 
 
 
-@robot.filter('^help$')
+@robot.filter('help')
 def help(message):
     return """
     ?关键字搜索文章
