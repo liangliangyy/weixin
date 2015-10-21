@@ -32,16 +32,11 @@ from werobot.reply import ArticlesReply, Article
 def search(message):
 
     s=message.content
+    searchstr=str(s).replace('?','')
+    if searchstr=='':
+        return '请在?后面加上要搜索的关键字哦'
 
-    blogapi=blog()
-    articles=blogapi.Search(str(s).replace('?','').replace('？',''))
-    if len(articles) ==0:
-        return str(s).replace('?','')+' 没有搜索到文章哦'
-    reply = ArticlesReply(message=message)
-    for article in articles:
-        reply.add_article(article)
-
-    return reply
+    return search(message,searchstr)
 
 
 #中文问号
@@ -59,14 +54,31 @@ def s(message):
 
     return reply
 
+
+def search(message,searchstr):
+    blogapi=blog()
+    articles=blogapi.Search(searchstr)
+    if len(articles) ==0:
+        return searchstr+' 没有搜索到文章哦'
+    reply = ArticlesReply(message=message)
+    for article in articles:
+        reply.add_article(article)
+
+    return reply
+
+
 @robot.text
 def deal(message):
+
+    s=message.content
     ask='？'
-
     ask=ask.decode('utf-8')
-
     if message.content.find(ask)==0:
+        searchstr=str(s.replace(ask,''))
+        if searchstr=='':
+            return '请在?后面加上要搜索的关键字哦'
         return s(message)
+
 
 
 @robot.subscribe
