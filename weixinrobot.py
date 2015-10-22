@@ -70,11 +70,11 @@ def search(message,searchstr):
 @robot.text
 def deal(message):
 
-    s=message.content
+    content=message.content
     ask='？'
     ask=ask.decode('utf-8')
     if message.content.find(ask)==0:
-        searchstr=str(s.replace(ask,''))
+        searchstr=str(content.replace(ask,''))
         if searchstr=='':
             return '请在?后面加上要搜索的关键字哦'
         return s(message)
