@@ -53,3 +53,4 @@ class RobotHandle():
         reply = ArticlesReply(message=self.message)
         for article in articles:
             reply.add_article(article)
+        return reply
