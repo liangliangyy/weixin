@@ -12,7 +12,7 @@
 @file: RobotHandle.py
 @time: 2015/10/23 22:34
 """
-from werobot.reply import ArticlesReply, Article
+from werobot.reply import ArticlesReply, Article, MusicReply
 from Apis.bolg import *
 
 
@@ -123,7 +123,7 @@ class RobotHandle():
             return False
 
     def tuling(self, info):
-        self.checkcount()
+
         from Apis.tuling import TuLing
 
         tl = TuLing(info)
@@ -132,3 +132,23 @@ class RobotHandle():
             return info['text']
         else:
             return self.helpinfo()
+
+    def music(self, search):
+        from Apis.music import Music
+
+        m = Music(search)
+        res = m.getData()
+        if res['status'] == 'failed':
+            return '咩有找到你要找到音乐哦'
+        musiclist = []
+        musics = res['data']['data']['list']
+        count = 0
+        for m in musics:
+            item = []
+            item.append(m['songName'])
+            item.append(m['albumName'])
+            item.append(m['songUrl'])
+            musiclist.append(item)
+            count += 1
+            if count == 4:
+                break;

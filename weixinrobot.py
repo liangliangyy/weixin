@@ -72,6 +72,12 @@ def idcard(message, session):
     cate = str(message.content).replace('idcard', '').replace('Idcard', '').replace(':', '')
 
     return handel.idcard(cate)
+@robot.filter(re.compile('^music\:.*$', re.I))
+def music(message,session):
+    handel = RobotHandle(message, session)
+    cate = str(message.content).replace('music', '').replace('Music', '').replace(':', '')
+
+    return handel.music(cate)
 
 
 """

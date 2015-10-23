@@ -20,6 +20,8 @@ sys.setdefaultencoding('utf-8')
 import sys, urllib, urllib2, json
 from urllib2 import HTTPError
 from werobot.reply import Article
+from werobot.reply import MusicReply
+
 import random
 
 
