@@ -23,7 +23,6 @@ gevent.monkey.patch_all()
 from werobot.reply import ArticlesReply, Article
 
 
-blogapi=blog()
 
 robot = werobot.WeRoBot(token='lylinux')
 import re
