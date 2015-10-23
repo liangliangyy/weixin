@@ -117,7 +117,7 @@ class RobotHandle():
         return '性别:%s 出生年月:%s 地址:%s' % (sex, data['birthday'], data['address'])
 
     def checkcount(self):
-        if int(self.session[self.userid]) % 5 == 0:
+        if int(self.session[self.userid]) % 15 == 0:
             return True
         else:
             return False
