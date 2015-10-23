@@ -18,9 +18,34 @@ from Apis.bolg import *
 
 class RobotHandle():
     def __init__(self, message, session):
-        print(message.source)
+        userid=message.source
+        if session[userid] is None:
+            session[userid]=0
+        else:
+            count= session[userid]
+            count=count+1
+            session[userid]=count
         self.message = message
+
         self.session = session
+
+    def helpinfo(self):
+        return '''欢迎关注!
+        默认会与图灵机器人聊天~~
+    你可以通过下面这些命令来获得信息
+    ?关键字搜索文章.
+    如?python.
+    category获得文章分类目录及文章数.
+    category-***获得该分类目录文章
+    如category-python
+    recent获得最新文章
+    help获得帮助.
+    weather:获得天气
+    如weather:西安
+    idcard:获得身份证信息
+    如idcard:61048119xxxxxxxxxx
+    PS:以上标点符号都不支持中文标点~~求轻喷~~~
+    '''
 
     # 搜索博客文章
     def search(self, content):
@@ -71,7 +96,7 @@ class RobotHandle():
         for daily in data['daily']:
             # 天气  最高温度  最低温度 降水概率
             res = res + '日期:%s 天气:%s 最高温度:%s 最低温度:%s 降水概率:%s\n' % (
-            daily['date'], daily['cond']['txt_n'], daily['tmp']['max'], daily['tmp']['min'], daily['pop'])
+                daily['date'], daily['cond']['txt_n'], daily['tmp']['max'], daily['tmp']['min'], daily['pop'])
 
         return res
 
@@ -88,12 +113,10 @@ class RobotHandle():
         if data['sex'] == "M":
             sex = "男"
         return '性别:%s 出生年月:%s 地址:%s' % (sex, data['birthday'], data['address'])
-    def tuling(self,info):
+
+    def tuling(self, info):
         from Apis.tuling import TuLing
-        tl=TuLing(info)
-        info=tl.getdata()
+
+        tl = TuLing(info)
+        info = tl.getdata()
         return info['text']
-
-
-
-

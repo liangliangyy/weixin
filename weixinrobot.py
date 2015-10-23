@@ -107,24 +107,15 @@ def deal(message):
 
 
 @robot.subscribe
-def sub(message):
-    return '''欢迎关注!
-    ?关键字搜索文章.
-    如?python.
-    category获得文章分类目录及文章数.
-    category-***获得该分类目录文章
-    如category-python
-    recent获得最新文章
-    help获得帮助.'''
+def sub(message,session):
+    handel = RobotHandle(message, session)
+    return handel.helpinfo()
 
 
 @robot.filter(re.compile('help', re.I))
-def help(message):
-    return """?关键字搜索文章
-
-    如?python
-    help获得帮助
-    """
+def help(message,session):
+    handel = RobotHandle(message, session)
+    return handel.helpinfo()
 
 
 @robot.text
