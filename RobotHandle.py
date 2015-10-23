@@ -140,16 +140,12 @@ class RobotHandle():
         res = m.getData()
         if res['status'] == 'failed':
             return '咩有找到你要找到音乐哦'
-        musiclist = []
-        musics = res['data']['data']['list']
-        count = 0
-        for m in musics:
-            item = []
-            item.append(m['songName'])
-            item.append(m['albumName'])
-            item.append(m['songUrl'])
-            musiclist.append(item)
-            count += 1
-            if count == 4:
-                break;
-        return musiclist
+
+        music = res['data']['data']['list'][0]
+
+        item=[]
+
+        item.append(music['songName'])
+        item.append(music['albumName'])
+        item.append(music['songUrl'])
+        return item
