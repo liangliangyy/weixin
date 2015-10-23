@@ -13,66 +13,66 @@
 @time: 2015/10/20 22:06
 """
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-
 import werobot
 import gevent.monkey;
+
 gevent.monkey.patch_all()
 from werobot.reply import ArticlesReply, Article
 
+robot = werobot.WeRoBot(token='lylinux', enable_session=True)
 
-
-robot = werobot.WeRoBot(token='lylinux')
 import re
 from werobot.reply import ArticlesReply, Article
 from RobotHandle import RobotHandle
 
 
-
-
-
 @robot.filter(re.compile(r"^\?.*"))
-def search(message):
-
-    s=message.content
-    searchstr=str(s).replace('?','')
-    handle=RobotHandle(message)
+def search(message, session):
+    s = message.content
+    searchstr = str(s).replace('?', '')
+    handle = RobotHandle(message, session)
     return handle.search(searchstr)
 
 
-@robot.filter(re.compile(r'^category\s*$',re.I))
-def category(message):
-    handel=RobotHandle(message)
+@robot.filter(re.compile(r'^category\s*$', re.I))
+def category(message, session):
+    handel = RobotHandle(message, session)
     return handel.get_category()
 
 
-@robot.filter(re.compile(r'^recent\s*$',re.I))
-def recent(message):
-    handel=RobotHandle(message)
+@robot.filter(re.compile(r'^recent\s*$', re.I))
+def recent(message, session):
+    handel = RobotHandle(message, session)
     return handel.get_recent_posts()
 
-@robot.filter(re.compile('^category\-.*$',re.I))
-def categorypost(message):
-    handel=RobotHandle(message)
-    cate=str(message.content).replace('Category','').replace('category','').replace('-','')
+
+@robot.filter(re.compile('^category\-.*$', re.I))
+def categorypost(message, session):
+    handel = RobotHandle(message, session)
+    cate = str(message.content).replace('Category', '').replace('category', '').replace('-', '')
     print(cate)
     return handel.get_category_posts(cate)
 
-@robot.filter(re.compile('^weather\:.*$',re.I))
-def weather(message):
-    handel=RobotHandle(message)
-    cate=str(message.content).replace('weather','').replace('Weather','').replace(':','')
+
+@robot.filter(re.compile('^weather\:.*$', re.I))
+def weather(message, session):
+    handel = RobotHandle(message, session)
+    cate = str(message.content).replace('weather', '').replace('Weather', '').replace(':', '')
     print(cate)
     return handel.weather(cate)
 
-@robot.filter(re.compile('^idcard\:.*$',re.I))
-def idcard(message):
-    handel=RobotHandle(message)
-    cate=str(message.content).replace('idcard','').replace('Idcard','').replace(':','')
+
+@robot.filter(re.compile('^idcard\:.*$', re.I))
+def idcard(message, session):
+    handel = RobotHandle(message, session)
+    cate = str(message.content).replace('idcard', '').replace('Idcard', '').replace(':', '')
     print(cate)
     return handel.idcard(cate)
+
 
 """
 #中文问号
@@ -97,14 +97,13 @@ def s(message):
 
 @robot.text
 def deal(message):
-    content=message.content
-    ask='？'
-    ask=ask.decode('utf-8')
-    if message.content.find(ask)==0:
-        searchstr=str(content.replace(ask,''))
-        if searchstr=='':
+    content = message.content
+    ask = '？'
+    ask = ask.decode('utf-8')
+    if message.content.find(ask) == 0:
+        searchstr = str(content.replace(ask, ''))
+        if searchstr == '':
             return '请在?后面加上要搜索的关键字哦'
-
 
 
 @robot.subscribe
@@ -119,29 +118,22 @@ def sub(message):
     help获得帮助.'''
 
 
-
-@robot.filter(re.compile('help',re.I))
+@robot.filter(re.compile('help', re.I))
 def help(message):
     return """?关键字搜索文章
 
     如?python
     help获得帮助
     """
+
+
 @robot.text
-
-
-
 @robot.handler
 def echo(message):
-    print(message.content)
-    reply = ArticlesReply(message=message)
-    article = Article(
-        title="使用django rest framework实现的小工具",
-        description="使用django rest framework实现的小工具",
-        img="http://www.lylinux.org/wp-content/uploads/2014/12/f.jpg",
-        url="http://www.lylinux.org/%E4%BD%BF%E7%94%A8django-rest-framework%E5%AE%9E%E7%8E%B0%E7%9A%84%E5%B0%8F%E5%B7%A5%E5%85%B7.html"
-    )
-    reply.add_article(article)
-    return reply
+    handel=RobotHandle
+    info=message.content
+    return handel.tuling(info)
 
-robot.run('auto',port=8888)
+
+
+robot.run('auto', port=8888)

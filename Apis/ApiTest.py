@@ -22,7 +22,7 @@ from bolg import *
 from RobotHandle import *
 if __name__=='__main__':
     handle=RobotHandle(None)
-    print handle.idcard('')
+    print handle.weather('西安')
 
     '''
     wearher=GetWeather('西安')
