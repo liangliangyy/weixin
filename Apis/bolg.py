@@ -76,8 +76,9 @@ class blog():
         return articles
     ##搜索文章
     def Search(self,searchstr):
-        url="http://www.lylinux.org/api/get_search_results/?search="+searchstr
 
+        url="http://www.lylinux.org/api/get_search_results/?search="+searchstr
+        print(url)
         jsons=self.GetJsons(url)
         articles=[]
         posts=jsons['posts']

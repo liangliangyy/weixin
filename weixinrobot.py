@@ -56,7 +56,7 @@ def recent(message):
 @robot.filter(re.compile('^category\-.*$',re.I))
 def categorypost(message):
     handel=RobotHandle(message)
-    cate=re.sub('^category-','',message.content)
+    cate=re.sub('^category\-\s*','',message.content,re.I)
     return handel.get_category_posts(cate)
 
 
@@ -116,6 +116,7 @@ def help(message):
 
 @robot.handler
 def echo(message):
+    print(message.content)
     reply = ArticlesReply(message=message)
     article = Article(
         title="使用django rest framework实现的小工具",
