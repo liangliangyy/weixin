@@ -36,15 +36,16 @@ class RobotHandle():
     def get_category(self):
         blogapi=blog()
         categorys=blogapi.get_categorys()
-
         return categorys
+
     def get_recent_posts(self):
         blogapi=blog()
-
         articles= blogapi.get_recent_posts()
         reply = ArticlesReply(message=self.message)
         for article in articles:
             reply.add_article(article)
+        return reply
+
     def get_category_posts(self,category):
         blogapi=blog()
         articles=blogapi.get_category_posts(category)
