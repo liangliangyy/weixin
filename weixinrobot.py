@@ -26,9 +26,8 @@ from werobot.reply import ArticlesReply, Article
 
 robot = werobot.WeRoBot(token='lylinux')
 import re
-from Apis.bolg import *
 from werobot.reply import ArticlesReply, Article
-from RobotHandle import *
+from RobotHandle import RobotHandle
 
 
 
@@ -42,16 +41,7 @@ def search(message):
     handle=RobotHandle(message)
     return handle.search(searchstr)
 
-ask='？'
-ask=ask.decode('utf-8')
 
-@robot.filter(re.compile(r"^\'+ask+'.*"))
-def search(message):
-
-    s=message.content
-    searchstr=str(s).replace('?','')
-    handle=RobotHandle(message)
-    return handle.search(searchstr)
 
 """
 #中文问号
@@ -71,11 +61,11 @@ def s(message):
 
 
 
+"""
 
 
 @robot.text
 def deal(message):
-
     content=message.content
     ask='？'
     ask=ask.decode('utf-8')
@@ -85,7 +75,6 @@ def deal(message):
             return '请在?后面加上要搜索的关键字哦'
 
 
-"""
 
 @robot.subscribe
 def sub(message):
