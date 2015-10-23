@@ -93,3 +93,6 @@ class RobotHandle():
         info=tl.getdata()
         return info['text']
 
+
+
+
