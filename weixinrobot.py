@@ -129,8 +129,8 @@ def help(message):
 
 @robot.text
 @robot.handler
-def echo(message):
-    handel=RobotHandle()
+def echo(message,session):
+    handel = RobotHandle(message, session)
     info=message.content
     return handel.tuling(info)
 
