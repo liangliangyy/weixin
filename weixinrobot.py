@@ -41,12 +41,14 @@ def search(message):
     handle=RobotHandle(message)
     return handle.search(searchstr)
 
+
 @robot.filter(re.compile('category',re.I))
 def category(message):
     handel=RobotHandle(message)
     return handel.get_category()
 
-@robot.filter(re.compile('recent'),re.I)
+
+@robot.filter(re.compile('recent',re.I))
 def recent(message):
     handel=RobotHandle(message)
     return handel.get_recent_posts()
