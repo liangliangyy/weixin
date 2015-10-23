@@ -42,18 +42,18 @@ def search(message):
     return handle.search(searchstr)
 
 
-@robot.filter(re.compile('category',re.I))
+@robot.filter(re.compile(r'^category\s*$',re.I))
 def category(message):
     handel=RobotHandle(message)
     return handel.get_category()
 
 
-@robot.filter(re.compile('recent',re.I))
+@robot.filter(re.compile(r'^recent\s*$',re.I))
 def recent(message):
     handel=RobotHandle(message)
     return handel.get_recent_posts()
 
-@robot.filter(re.compile('^category-.*$',re.I))
+@robot.filter(re.compile('^category\-.*$',re.I))
 def categorypost(message):
     handel=RobotHandle(message)
     cate=re.sub('^category-','',message.content)
