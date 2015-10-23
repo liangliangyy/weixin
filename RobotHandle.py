@@ -117,8 +117,10 @@ class RobotHandle():
         return '性别:%s 出生年月:%s 地址:%s' % (sex, data['birthday'], data['address'])
 
     def checkcount(self):
-        if int(self.session[self.userid]) % 15 == 0:
-            return self.helpinfo()
+        if int(self.session[self.userid]) % 5 == 0:
+            return True
+        else:
+            return False
 
     def tuling(self, info):
         self.checkcount()
@@ -126,4 +128,7 @@ class RobotHandle():
 
         tl = TuLing(info)
         info = tl.getdata()
-        return info['text']
+        if not self.checkcount():
+            return info['text']
+        else:
+            return self.helpinfo()
