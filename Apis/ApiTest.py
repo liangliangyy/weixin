@@ -19,13 +19,10 @@ from GetWeather import *
 import json
 from tuling import *
 from bolg import *
-
+from RobotHandle import *
 if __name__=='__main__':
-    b=blog()
-    #res=b.get_categorys()
-    res=b.get_category_posts('JavaScript')
-    for i in res:
-        print(str(i))
+    handle=RobotHandle(None)
+    print handle.weather('西安f')
 
     '''
     wearher=GetWeather('西安')

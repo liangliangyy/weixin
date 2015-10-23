@@ -55,3 +55,21 @@ class RobotHandle():
         for article in articles:
             reply.add_article(article)
         return reply
+    def weather(self,cityname):
+        from Apis.GetWeather import *
+        weather=GetWeather(cityname)
+
+        result=weather.getdata()
+        data=result[0]
+        if data['code']=='500':
+            return data['msg']
+
+        res='污染度:%s  舒适度:%s 建议:%s 未来%s天天气预报:\n' % (data['qlty'],data['brf'],data['txt'],len(data['daily']))
+        for daily in data['daily']:
+            #天气  最高温度  最低温度 降水概率
+            res=res+'天气:%s 最高温度:%s 最低温度:%s 降水概率:%s\n' % ( daily['cond']['txt_n'],daily['tmp']['max'],daily['tmp']['min'],daily['pop'] )
+
+        return res
+
+
+
