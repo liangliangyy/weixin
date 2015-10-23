@@ -46,6 +46,8 @@ class RobotHandle():
     如weather:西安
     idcard:获得身份证信息
     如idcard:61048119xxxxxxxxxx
+    music:音乐搜索
+    如music:阴天快乐
     PS:以上标点符号都不支持中文标点~~求轻喷~~~
     '''
 
