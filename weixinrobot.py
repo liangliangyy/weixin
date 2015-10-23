@@ -23,22 +23,38 @@ gevent.monkey.patch_all()
 from werobot.reply import ArticlesReply, Article
 
 
+blogapi=blog()
+
 robot = werobot.WeRoBot(token='lylinux')
 import re
 from Apis.bolg import *
 from werobot.reply import ArticlesReply, Article
+from RobotHandle import *
+
+
+
+
 
 @robot.filter(re.compile(r"^\?.*"),re.compile(r"^\？.*"))
 def search(message):
 
     s=message.content
     searchstr=str(s).replace('?','')
-    if searchstr=='':
-        return '请在?后面加上要搜索的关键字哦'
+    handle=RobotHandle(message)
+    return handle.search(searchstr)
 
-    return search(message,searchstr)
+ask='？'
+ask=ask.decode('utf-8')
 
+@robot.filter(re.compile(r"^\'+ask+'.*"))
+def search(message):
 
+    s=message.content
+    searchstr=str(s).replace('?','')
+    handle=RobotHandle(message)
+    return handle.search(searchstr)
+
+"""
 #中文问号
 def s(message):
     s=message.content
@@ -55,16 +71,7 @@ def s(message):
     return reply
 
 
-def search(message,searchstr):
-    blogapi=blog()
-    articles=blogapi.Search(searchstr)
-    if len(articles) ==0:
-        return searchstr+' 没有搜索到文章哦'
-    reply = ArticlesReply(message=message)
-    for article in articles:
-        reply.add_article(article)
 
-    return reply
 
 
 @robot.text
@@ -77,9 +84,9 @@ def deal(message):
         searchstr=str(content.replace(ask,''))
         if searchstr=='':
             return '请在?后面加上要搜索的关键字哦'
-        return s(message)
 
 
+"""
 
 @robot.subscribe
 def sub(message):
@@ -96,6 +103,7 @@ def help(message):
     如?python
     help获得帮助
     """
+@robot.text
 
 
 

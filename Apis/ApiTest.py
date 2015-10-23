@@ -21,10 +21,11 @@ from tuling import *
 from bolg import *
 
 if __name__=='__main__':
-
-    #b=blog()
-    #res= b.Search('python')
-    #print(str(res))
+    b=blog()
+    #res=b.get_categorys()
+    res=b.get_category_posts('JavaScript')
+    for i in res:
+        print(str(i))
 
     '''
     wearher=GetWeather('西安')
