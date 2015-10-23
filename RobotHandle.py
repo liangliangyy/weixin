@@ -19,12 +19,13 @@ from Apis.bolg import *
 class RobotHandle():
     def __init__(self, message, session):
         userid=message.source
-        if session[userid] is None:
-            session[userid]=0
-        else:
+
+        try:
             count= session[userid]
             count=count+1
             session[userid]=count
+        except:
+            session[userid]=0
         self.message = message
 
         self.session = session
