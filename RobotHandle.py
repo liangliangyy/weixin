@@ -152,3 +152,4 @@ class RobotHandle():
             count += 1
             if count == 4:
                 break;
+        return musiclist
