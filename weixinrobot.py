@@ -56,8 +56,8 @@ def recent(message):
 @robot.filter(re.compile('^category\-.*$',re.I))
 def categorypost(message):
     handel=RobotHandle(message)
-    cate=re.sub('^category\-\s*','',str(message.content),re.I)
-
+    cate=re.sub('category','',str(message.content),re.I)
+    catr=cate.replace('-'.decode('utf-8'),'')
     print(cate)
     return handel.get_category_posts(cate)
 
