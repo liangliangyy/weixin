@@ -79,7 +79,7 @@ class blog():
     def Search(self, searchstr):
 
         url = "http://www.lylinux.org/api/get_search_results/?search=" + searchstr
-        print(url)
+
         jsons = self.GetJsons(url)
         articles = []
         posts = jsons['posts']
@@ -101,7 +101,7 @@ class blog():
     ##获得分类目录文章
     def get_category_posts(self, category):
         url = 'http://www.lylinux.org/api/get_category_posts/?slug=' + category
-        print(url)
+
         try:
             jsons = self.GetJsons(url)
             posts = jsons['posts']

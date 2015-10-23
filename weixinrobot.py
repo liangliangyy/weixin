@@ -54,7 +54,7 @@ def recent(message, session):
 def categorypost(message, session):
     handel = RobotHandle(message, session)
     cate = str(message.content).replace('Category', '').replace('category', '').replace('-', '')
-    print(cate)
+
     return handel.get_category_posts(cate)
 
 
@@ -62,7 +62,7 @@ def categorypost(message, session):
 def weather(message, session):
     handel = RobotHandle(message, session)
     cate = str(message.content).replace('weather', '').replace('Weather', '').replace(':', '')
-    print(cate)
+
     return handel.weather(cate)
 
 
@@ -70,7 +70,7 @@ def weather(message, session):
 def idcard(message, session):
     handel = RobotHandle(message, session)
     cate = str(message.content).replace('idcard', '').replace('Idcard', '').replace(':', '')
-    print(cate)
+
     return handel.idcard(cate)
 
 
