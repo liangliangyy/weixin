@@ -60,15 +60,14 @@ def categorypost(message):
     print(cate)
     return handel.get_category_posts(cate)
 
-@robot.filter(re.compile('^weather\:.*$'),re.I)
+@robot.filter(re.compile('^weather\:.*$',re.I))
 def weather(message):
     handel=RobotHandle(message)
     cate=str(message.content).replace('weather','').replace('Weather','').replace(':','')
     print(cate)
     return handel.weather(cate)
 
-
-@robot.filter(re.compile('^idcard\:.*$'),re.I)
+@robot.filter(re.compile('^idcard\:.*$',re.I))
 def idcard(message):
     handel=RobotHandle(message)
     cate=str(message.content).replace('idcard','').replace('Idcard','').replace(':','')
