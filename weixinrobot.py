@@ -33,13 +33,29 @@ from RobotHandle import RobotHandle
 
 
 
-@robot.filter(re.compile(r"^\?.*"),re.compile(r"^\？.*"))
+@robot.filter(re.compile(r"^\?.*"))
 def search(message):
 
     s=message.content
     searchstr=str(s).replace('?','')
     handle=RobotHandle(message)
     return handle.search(searchstr)
+
+@robot.filter(re.compile('category',re.I))
+def category(message):
+    handel=RobotHandle(message)
+    return handel.get_category()
+
+@robot.filter(re.compile('recent'),re.I)
+def recent(message):
+    handel=RobotHandle(message)
+    return handel.get_recent_posts()
+
+@robot.filter(re.compile('^category-.*$',re.I))
+def categorypost(message):
+    handel=RobotHandle(message)
+    cate=re.sub('^category-','',message.content)
+    return handel.get_category_posts(cate)
 
 
 
@@ -88,6 +104,7 @@ def sub(message):
 @robot.filter(re.compile('help',re.I))
 def help(message):
     return """?关键字搜索文章
+
     如?python
     help获得帮助
     """
