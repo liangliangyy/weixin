@@ -18,14 +18,15 @@ from Apis.bolg import *
 
 class RobotHandle():
     def __init__(self, message, session):
-        userid=message.source
+        userid = message.source
+        self.userid = userid
 
         try:
-            count= session[userid]
-            count=count+1
-            session[userid]=count
+            count = session[userid]
+            count = count + 1
+            session[userid] = count
         except:
-            session[userid]=0
+            session[userid] = 0
         self.message = message
 
         self.session = session
@@ -115,7 +116,12 @@ class RobotHandle():
             sex = "男"
         return '性别:%s 出生年月:%s 地址:%s' % (sex, data['birthday'], data['address'])
 
+    def checkcount(self):
+        if self.session[self.userid] % 15 == 0:
+            return self.helpinfo()
+
     def tuling(self, info):
+        self.checkcount()
         from Apis.tuling import TuLing
 
         tl = TuLing(info)
