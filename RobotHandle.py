@@ -18,6 +18,7 @@ from Apis.bolg import *
 
 class RobotHandle():
     def __init__(self, message, session):
+        print(message.source)
         self.message = message
         self.session = session
 

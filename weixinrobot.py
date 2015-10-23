@@ -130,7 +130,7 @@ def help(message):
 @robot.text
 @robot.handler
 def echo(message):
-    handel=RobotHandle
+    handel=RobotHandle()
     info=message.content
     return handel.tuling(info)
 
