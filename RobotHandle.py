@@ -56,7 +56,7 @@ class RobotHandle():
             reply.add_article(article)
         return reply
     def weather(self,cityname):
-        from Apis.GetWeather import *
+        from Apis.GetWeather import GetWeather
         weather=GetWeather(cityname)
 
         result=weather.getdata()
@@ -71,5 +71,17 @@ class RobotHandle():
 
         return res
 
+    def idcard(self,idcard):
+        from Apis.GetIdCard import GetIdCard
+        card=GetIdCard(idcard)
+        cardinfo=card.getdata()
+
+        if cardinfo['errNum']==-1:
+            return cardinfo['retMsg']
+        data=cardinfo['retData']
+        sex="女"
+        if  data['sex']=="M":
+            sex="男"
+        return '性别:%s 出生年月:%s 地址:%s' % (sex,data['birthday'],data['address'])
 
 

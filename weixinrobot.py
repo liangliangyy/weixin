@@ -67,6 +67,14 @@ def weather(message):
     print(cate)
     return handel.weather(cate)
 
+
+@robot.filter(re.compile('^idcard\:.*$'),re.I)
+def idcard(message):
+    handel=RobotHandle(message)
+    cate=str(message.content).replace('idcard','').replace('Idcard','').replace(':','')
+    print(cate)
+    return handel.idcard(cate)
+
 """
 #中文问号
 def s(message):
