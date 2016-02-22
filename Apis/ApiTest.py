@@ -19,10 +19,15 @@ from GetWeather import *
 import json
 from tuling import *
 from bolg import *
+
+from  werobot.client import Client
+
 from RobotHandle import *
 if __name__=='__main__':
-    handle=RobotHandle(None)
-    print handle.music('阴天快乐')
+    #handle=RobotHandle(None)
+
+    #print handle.music('阴天快乐')
+    robotclient=Client('wxd4a3cb268949eeed','69683f077bdc573be4d971873519007a')
 
     '''
     wearher=GetWeather('西安')
