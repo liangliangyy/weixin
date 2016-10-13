@@ -30,10 +30,9 @@ class CommandHandler():
             return
         #self.Command='ls'
         if self.Command.upper()=='REBOOT':
-
             return self.__run(' /usr/bin/python /root/scripts/LinodeHelper.py ')
         elif  self.Command.upper()=='WORDPRESS':
-             return self.__run('cd /var/www/wordpress/ && git add . && git commit -m "test" && git push')
+            return self.__run('cd /var/www/wordpress/ && git add . && git commit -m "test" && git push')
         elif self.Command.upper()=='NGROK':
             return self.__run('/root/scripts/ngrok.sh > /dev/null 2>&1 &')
         elif self.Command.upper()=='VPN':
