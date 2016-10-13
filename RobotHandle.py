@@ -14,22 +14,89 @@
 """
 from werobot.reply import ArticlesReply, Article, MusicReply
 from Apis.bolg import *
+import json
+import jsonpickle
+from Apis.CommandHandler import *
+import hashlib
+
+
+def GetMD5(text):
+    hash_md5 = hashlib.md5(text)
+    return hash_md5.hexdigest()
+
+
+class UserInfo():
+    def __init__(self):
+        self.isAdmin = False
+        self.isPasswordSet = False
+        self.Count = 0
+        self.Command = ''
 
 
 class RobotHandle():
     def __init__(self, message, session):
         userid = message.source
         self.userid = userid
-
         try:
-            count = session[userid]
-            count = count + 1
-            session[userid] = count
+            info = session[userid]
+            # print info
+            self.userinfo = jsonpickle.decode(info)
         except:
-            session[userid] = 0
+            userinfo = UserInfo()
+            self.userinfo = userinfo
         self.message = message
-
         self.session = session
+
+    def SaveSession(self):
+        info = jsonpickle.encode(self.userinfo)
+        self.session[self.userid] = info
+
+    def handleText(self, info):
+        if self.userinfo.isAdmin and info.upper() == 'EXIT':
+            self.userinfo = UserInfo()
+            self.SaveSession()
+            return "退出成功"
+        if info.upper() == 'ADMIN':
+            self.userinfo.isAdmin = True
+            self.SaveSession()
+            return "输入管理员密码"
+        if self.userinfo.isAdmin and not self.userinfo.isPasswordSet:
+            with open('/root/scripts/weixinadmin.conf', 'r') as file:
+                # if True:
+                passwd = file.readline()
+
+                if passwd.upper() == GetMD5(info).upper():
+                    self.userinfo.isPasswordSet = True
+                    self.SaveSession()
+                    return "验证通过,请输入命令或者要执行的命令代码:输入helpme获得帮助"
+                else:
+                    if self.userinfo.Count > 4:
+                        self.userinfo = UserInfo()
+                        self.SaveSession()
+                        return "超过验证次数"
+                    self.userinfo.Count += 1
+                    self.SaveSession()
+                    return "验证失败，请重新输入管理员密码:"
+
+        if self.userinfo.isAdmin and self.userinfo.isPasswordSet:
+            if self.userinfo.Command != '' and info.upper() == 'Y':
+                command = CommandHandler(self.userinfo.Command)
+                print self.userinfo.Command
+                return command.RunCommand()
+            else:
+                if info.upper() == 'HELPME':
+                    return CommandHandler.GetHelp()
+                self.userinfo.Command = info
+                self.SaveSession()
+                return "确认执行: " + info + " 命令?"
+        from Apis.tuling import TuLing
+
+        tl = TuLing(info)
+        info = tl.getdata()
+        if not self.checkcount():
+            return info['text']
+        else:
+            return self.helpinfo()
 
     def helpinfo(self):
         return '''欢迎关注!
@@ -121,17 +188,6 @@ class RobotHandle():
     def checkcount(self):
         return False
 
-    def tuling(self, info):
-
-        from Apis.tuling import TuLing
-
-        tl = TuLing(info)
-        info = tl.getdata()
-        if not self.checkcount():
-            return info['text']
-        else:
-            return self.helpinfo()
-
     def music(self, search):
         from Apis.music import Music
 
@@ -142,7 +198,7 @@ class RobotHandle():
 
         music = res['data']['data']['list'][0]
 
-        item=[]
+        item = []
 
         item.append(music['songName'])
         item.append(music['albumName'])

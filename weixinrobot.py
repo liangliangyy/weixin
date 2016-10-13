@@ -118,7 +118,7 @@ def sub(message,session):
     return handel.helpinfo()
 
 
-@robot.filter(re.compile('help', re.I))
+@robot.filter(re.compile('^help$', re.I))
 def help(message,session):
     handel = RobotHandle(message, session)
     return handel.helpinfo()
@@ -129,7 +129,7 @@ def help(message,session):
 def echo(message,session):
     handel = RobotHandle(message, session)
     info=message.content
-    return handel.tuling(info)
+    return handel.handleText(info)
 
 
 
