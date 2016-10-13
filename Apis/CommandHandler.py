@@ -31,15 +31,15 @@ class CommandHandler():
         #self.Command='ls'
         if self.Command.upper()=='REBOOT':
 
-            self.__run(' /usr/bin/python /root/scripts/LinodeHelper.py ')
+            return self.__run(' /usr/bin/python /root/scripts/LinodeHelper.py ')
         elif  self.Command.upper()=='WORDPRESS':
-             self.__run('cd /var/www/wordpress/ && git add . && git commit -m "test" && git push')
+             return self.__run('cd /var/www/wordpress/ && git add . && git commit -m "test" && git push')
         elif self.Command.upper()=='NGROK':
-            self.__run('/root/scripts/ngrok.sh > /dev/null 2>&1 &')
+            return self.__run('/root/scripts/ngrok.sh > /dev/null 2>&1 &')
         elif self.Command.upper()=='VPN':
-            self.__run('/bin/sh /root/scripts/vpnrestart.sh ')
+            return self.__run('/bin/sh /root/scripts/vpnrestart.sh ')
         else:
-            self.__run(self.Command)
+            return self.__run(self.Command)
 
     def __run(self,runcommand):
         print 'ss'+runcommand

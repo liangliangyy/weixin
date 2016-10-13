@@ -63,7 +63,7 @@ class RobotHandle():
         if self.userinfo.isAdmin and not self.userinfo.isPasswordSet:
             with open('/root/scripts/weixinadmin.conf', 'r') as file:
                 # if True:
-                passwd = file.readline()
+                passwd = file.readline().replace('\n','')
 
                 if passwd.upper() == GetMD5(info).upper():
                     self.userinfo.isPasswordSet = True
