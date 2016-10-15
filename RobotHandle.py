@@ -79,13 +79,14 @@ class RobotHandle():
                     return "验证失败，请重新输入管理员密码:"
 
         if self.userinfo.isAdmin and self.userinfo.isPasswordSet:
+            command = CommandHandler(self.userinfo.Command)
             if self.userinfo.Command != '' and info.upper() == 'Y':
-                command = CommandHandler(self.userinfo.Command)
+
                 print self.userinfo.Command
                 return command.RunCommand()
             else:
                 if info.upper() == 'HELPME':
-                    return CommandHandler.GetHelp()
+                    return command.GetHelp()
                 self.userinfo.Command = info
                 self.SaveSession()
                 return "确认执行: " + info + " 命令?"

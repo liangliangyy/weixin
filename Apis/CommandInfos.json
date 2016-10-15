@@ -1,0 +1,22 @@
+[
+  {
+    "Command": " /usr/bin/python /root/scripts/LinodeHelper.py ",
+    "Desc": "重启",
+    "Name": "reboot"
+  },
+  {
+    "Command": "cd /var/www/wordpress/ && git add . && git commit -m \"test\" && git push",
+    "Desc": "提交wordpress代码",
+    "Name": "wordpress"
+  },
+  {
+    "Command": " /root/scripts/ngrok.sh > /dev/null 2>&1 &",
+    "Desc": "打开ngrok服务",
+    "Name": "ngrok"
+  },
+  {
+    "Command": "/bin/sh /root/scripts/vpnrestart.sh ",
+    "Desc": "重启VPN服务",
+    "Name": "vpn"
+  }
+]
