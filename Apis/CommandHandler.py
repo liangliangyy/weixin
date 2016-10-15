@@ -72,6 +72,8 @@ class CommandHandler():
                 return self.__run(config.Command)
         return self.__run(self.Command.lower())
     def __run(self, runcommand):
-        print 'ss' + runcommand
-        str = os.popen(runcommand).read()
-        return str
+        try:
+            str = os.popen(runcommand).read()
+            return str
+        except:
+            return '命令执行出错!'
