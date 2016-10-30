@@ -23,6 +23,10 @@
     "Command": "apt-get update && aptitude upgrade -y",
     "Desc": "系统更新",
     "Name": "update"
+  },
+  {
+    "Command": "/bin/sh /root/scripts/servicerestart.sh",
+    "Desc": "重启系统服务",
+    "Name": "restart"
   }
 ]
-

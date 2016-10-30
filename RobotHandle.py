@@ -63,7 +63,7 @@ class RobotHandle():
         if self.userinfo.isAdmin and not self.userinfo.isPasswordSet:
             with open('/root/scripts/weixinadmin.conf', 'r') as file:
                 # if True:
-                passwd = file.readline().replace('\n','')
+                passwd = file.readline().replace('\n', '')
 
                 if passwd.upper() == GetMD5(info).upper():
                     self.userinfo.isPasswordSet = True
@@ -155,10 +155,9 @@ class RobotHandle():
         return reply
 
     def weather(self, cityname):
-        from Apis.GetWeather import GetWeather
 
-        weather = GetWeather(cityname)
-
+        from  Apis.BaiDuApi import Weather
+        weather = Weather(cityname)
         result = weather.getdata()
         data = result[0]
         if data['code'] == '500':
@@ -173,9 +172,9 @@ class RobotHandle():
         return res
 
     def idcard(self, idcard):
-        from Apis.GetIdCard import GetIdCard
 
-        card = GetIdCard(idcard)
+        from Apis.BaiDuApi import IDCard
+        card = IDCard(idcard)
         cardinfo = card.getdata()
 
         if cardinfo['errNum'] == -1:
@@ -190,7 +189,7 @@ class RobotHandle():
         return False
 
     def music(self, search):
-        from Apis.music import Music
+        from Apis.BaiDuApi import Music
 
         m = Music(search)
         res = m.getData()
