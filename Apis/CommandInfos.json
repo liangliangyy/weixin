@@ -18,5 +18,11 @@
     "Command": "/bin/sh /root/scripts/vpnrestart.sh ",
     "Desc": "重启VPN服务",
     "Name": "vpn"
+  },
+  {
+    "Command": "apt-get update && aptitude upgrade -y",
+    "Desc": "系统更新",
+    "Name": "update"
   }
 ]
+
