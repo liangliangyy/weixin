@@ -28,5 +28,11 @@
     "Command": "/bin/sh /root/scripts/servicerestart.sh",
     "Desc": "重启系统服务",
     "Name": "restart"
+  },
+  {
+    "Command": " supervisorctl reload ",
+    "Desc": "重启 supervisor",
+    "Name": "restartsu"
   }
+  
 ]
